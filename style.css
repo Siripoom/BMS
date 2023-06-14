@@ -33,6 +33,10 @@
   font-family: playfair-display;
 }
 
+body {
+  font-family: playfair-display;
+}
+
 .button:hover {
   background-color: #5b5a5b; /* Adjust the button color as needed */
   color: #fff;
@@ -46,16 +50,125 @@
   }
 }
 
-.text{
+.text {
   color: #343434;
 }
 
-.container{
+.container {
   margin-top: 5%;
-  > .h2{
+  > .h2 {
     color: #5b5a5b;
   }
 }
 /* body{
     font-family: playfair-display;
  } */
+
+/* The side navigation menu */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #5a5b5b;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: #e8e5de;
+  padding: 16px;
+  text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {
+    float: left;
+  }
+  div.content {
+    margin-left: 0;
+  }
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+.sidebar {
+  > .h3 {
+    margin-left: 27px;
+    margin-top: 10px;
+    color: #dcdbd6;
+  }
+}
+
+#addbtn{
+  width: auto; 
+  height:auto; 
+  background-color:#A4D0A4;
+}
+
+#addbtn:hover {
+  background-color: #A4D0A4; /* Adjust the button color as needed */
+  color: #fff;
+}
+#deletebtn{
+  width: 100%; 
+  height:auto; 
+  position: relative;
+  text-align: center;
+  background-color:#FF6D60;
+
+}
+
+#deletebtn:hover {
+  background-color: #FF6D60; /* Adjust the button color as needed */
+  color: #fff;
+}
+#editbtn{
+  width: 70%; 
+  height:auto; 
+  background-color:#F7D060;
+}
+
+#editbtn:hover {
+  background-color: #F7D060; /* Adjust the button color as needed */
+  color: #fff;
+}
+
+button{
+  position: relative;
+  text-align: center;
+}
+
+

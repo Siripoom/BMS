@@ -1,3 +1,10 @@
+<?php
+
+include('server.php');
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,10 +20,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
 <style>
-    body{
+    body {
         font-family: playfair-display;
     }
 </style>
+
 <body>
     <nav class="navbar navbar-expand-lg" style="background-color: #E9E6DD;">
         <div class="container-fluid">
@@ -36,40 +44,50 @@
                         <a class="nav-link disabled">Disabled</a>
                     </li> -->
                 </ul>
-                <form class="d-flex" role="search">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn" style="background-color: #5B6957; border-radius: 20px; color:white;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <?php if (isset($_SESSION['email'])) { ?>
+
+                    <a class=" fw-bold text-dark nav-link mx-4" href=""><?php echo $_SESSION['email']; ?></a>
+                    <a type="submit" href="logout.php" class="btn btn-danger" style="color: white; border-radius:  20px; color:white;">Logout</a>
+                    <button type="button" class="btn" style="background-color: #5B6957; border-radius:  20px; color:white; visibility: hidden;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         SignIn
                     </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Sign-In</h1>
-                                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label class="form-label">Email address</label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="password">
+                <?php } else { ?>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn" style="background-color: #5B6957; border-radius:  20px; color:white; " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        SignIn
+                    </button>
+                <?php } ?>
+                <!-- <form action="signin_db.php" method="post"> -->
+                    <form class="d-flex"  action="signin_db.php" method="post" role="search">
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Sign-In</h1>
+                                        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="" name="password">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Email address</label>
+                                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="" name="password">
+                                        </div>
+                                        <div class="mb-3 text-center">
+                                            <a href="signup.php">No account?</a>
+                                        </div>
                                     </div>
-                                    <div class="mb-3 text-center">
-                                        <a href="">No account?</a>
+                                    <div class="modal-footer">
+                                        <button type="button " class="btn btn btn-outline-danger" style="border-radius: 20px; " data-bs-dismiss="modal">Close</button>
+                                        <input type="submit" name="signin" class="btn" style="background-color: #5B6957; border-radius: 20px; color:white;" value="Sign In">
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button " class="btn btn btn-outline-danger" style="border-radius: 20px; " data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn" style="background-color: #5B6957; border-radius: 20px; color:white;">Save changes</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <!-- </form> -->
                 </form>
             </div>
         </div>
