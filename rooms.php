@@ -28,7 +28,7 @@ require('server.php');
     <div class="hero-image">
         <div class="hero-text">
             <h1>Accommodation</h1>
-            <a href="#" class="button">Book Now</a>
+            <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#bookingmodal">Book Now</a>
         </div>
     </div>
     <section>
@@ -63,7 +63,7 @@ require('server.php');
             </div>
             <center>
 
-                <a href="#" class="button mt-3">Book Now</a>
+            <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#bookingmodal">Book Now</a>
             </center>
             <div class="h3 mt-3">Single Room</div>
             <div class="p">Welcome to our cozy and comfortable single room. This thoughtfully designed space is perfect for solo travelers seeking a peaceful retreat. Step into the room and be greeted by a soothing ambiance and a sense of tranquility.</div>
@@ -147,7 +147,7 @@ require('server.php');
             </div>
             <center>
 
-                <a href="#" class="button mt-3">Book Now</a>
+            <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#bookingmodal">Book Now</a>
             </center>
             <div class="h3 mt-3">
                 Double Rooms
@@ -202,5 +202,5 @@ require('server.php');
         </div>
     </section>
 </body>
-
+<?php include('footer.php') ?>
 </html>

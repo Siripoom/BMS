@@ -14,8 +14,8 @@
     <!--  Sidebar  -->
     <div class="sidebar">
         <div class="h3 mx-5">Admin</div>
-        <a href="" class="">Rooms</a>
-        <a href="" class="">Booking</a>
+        <a href="room_manage.php" class="">Rooms</a>
+        <a href="booking_manage.php" class="">Booking</a>
         <!-- <a href="" class="">Home</a>
         <a href="" class="">Home</a> -->
     </div>

@@ -80,6 +80,7 @@ if (isset($_POST["signup"])) {
         $query = mysqli_query($conn, $insert);
         if ($query) {
             $_SESSION['email'] = $email;
+            $_SESSION['name'] = $fname;
             header('location:index.php');
         }
     } else {
@@ -88,14 +89,14 @@ if (isset($_POST["signup"])) {
 }
 
 
-$target_dir = "upload/";  // Modify the directory path as per your needs
-$roomnum = $_POST['roomnumber'];
-$price = $_POST['price'];
-$cap = $_POST['cap'];
-$cate = $_POST['cateroom'];
-$detail = $_POST['detail'];
 
 if (isset($_POST['save'])) {
+    $target_dir = "upload/";  // Modify the directory path as per your needs
+    $roomnum = $_POST['roomnumber'];
+    $price = $_POST['price'];
+    $cap = $_POST['cap'];
+    $cate = $_POST['cateroom'];
+    $detail = $_POST['detail'];
 
     if (!empty($_FILES["file"]["name"])) {
         $filename = basename($_FILES["file"]["name"]);
@@ -113,6 +114,103 @@ if (isset($_POST['save'])) {
     }
 }
 
+if (isset($_POST['book'])) {
+    $cateroom = $_POST['cateroom'];
+    $checkIn = $_POST['checkIn'];
+    $checkOut = $_POST['checkOut'];
+    $rooms = $_POST['rooms'];
+    $adults = $_POST['adults'];
+    $children = $_POST['children'];
+    $date = $checkIn . " - " . $checkOut;
 
+    if (empty($checkIn)) {
+        echo '
+        <script>
+        setTimeout(function() {
+        swal({
+                title: "warning",
+                text: "Please enter date check In.",
+                type: "warning"
+            }, function() {
+            window.location = "index.php";
+        });
+        }, 1000);
+    </script>
+        ';
+    }
+    if (empty($checkOut)) {
+        echo '
+        <script>
+        setTimeout(function() {
+        swal({
+                title: "warning",
+                text: "Please enter date check Out.",
+                type: "warning"
+            }, function() {
+            window.location = "index.php";
+        });
+        }, 1000);
+    </script>
+        ';
+    } 
+    if (empty($rooms)) {
+        echo '
+        <script>
+        setTimeout(function() {
+        swal({
+                title: "warning",
+                text: "Please enter room amount.",
+                type: "warning"
+            }, function() {
+            window.location = "index.php";
+        });
+        }, 1000);
+    </script>
+        ';
+    }  
+    $email = $_SESSION['email'];
+    $requestId = "SELECT * FROM members WHERE email = '$email'";
+    
+    $result = mysqli_query($conn,$requestId);
+    $id = mysqli_fetch_assoc($result);
+    
+    // echo   $email;
+     $idCustomer =    $id['member_id'];
+
+    $sql = $conn->query("INSERT INTO `booking`(`customer_name`, `booking_date`, `status`, `aults`, `children`, `rooms`) 
+    VALUES ('$idCustomer','$date','booking success','$adults','$children','$rooms')");
+
+    if($sql){
+        echo '
+        <script>
+        setTimeout(function() {
+        swal({
+                title: "Success",
+                text: "Room booked",
+                type: "success"
+            }, function() {
+            window.location = "index.php";
+        });
+        }, 1000);
+    </script>
+        ';
+    }else{
+        echo '
+        <script>
+        setTimeout(function() {
+        swal({
+                title: "warning",
+                text: "Have something wrong please try again.",
+                type: "warning"
+            }, function() {
+            window.location = "index.php";
+        });
+        }, 1000);
+    </script>
+        ';
+    }
+    
+
+}
 
 ?>
