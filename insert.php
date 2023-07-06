@@ -107,7 +107,19 @@ if (isset($_POST['save'])) {
         if (in_array($fileType, $allowTypes)) {
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
                 $sql = $conn->query("INSERT INTO `roomsinfo`(`room_number`, `detail`, `cate_room`, `price`,`cap_person`, `img`,status) VALUES ('$roomnum','$detail','$cate','$price','$cap','" . $filename . "','vacant')");
-                echo "Uploaded";
+                echo '
+                    <script>
+                        setTimeout(function() {
+                            swal({
+                                    title: "Success",
+                                    text: "Room added",
+                                    type: "success"
+                                }, function() {
+                                    window.location = "room_manage.php";
+                                });
+                        }, 1000);
+                    </script>
+        ';
             } else {
             }
         }
@@ -152,7 +164,7 @@ if (isset($_POST['book'])) {
         }, 1000);
     </script>
         ';
-    } 
+    }
     if (empty($rooms)) {
         echo '
         <script>
@@ -167,20 +179,20 @@ if (isset($_POST['book'])) {
         }, 1000);
     </script>
         ';
-    }  
+    }
     $email = $_SESSION['email'];
     $requestId = "SELECT * FROM members WHERE email = '$email'";
-    
-    $result = mysqli_query($conn,$requestId);
+
+    $result = mysqli_query($conn, $requestId);
     $id = mysqli_fetch_assoc($result);
-    
+
     // echo   $email;
-     $idCustomer =    $id['member_id'];
+    $idCustomer =    $id['member_id'];
 
     $sql = $conn->query("INSERT INTO `booking`(`customer_name`, `booking_date`, `status`, `aults`, `children`, `rooms`) 
     VALUES ('$idCustomer','$date','booking success','$adults','$children','$rooms')");
 
-    if($sql){
+    if ($sql) {
         echo '
         <script>
         setTimeout(function() {
@@ -194,7 +206,7 @@ if (isset($_POST['book'])) {
         }, 1000);
     </script>
         ';
-    }else{
+    } else {
         echo '
         <script>
         setTimeout(function() {
@@ -209,8 +221,6 @@ if (isset($_POST['book'])) {
     </script>
         ';
     }
-    
-
 }
 
 ?>

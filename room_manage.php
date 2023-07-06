@@ -69,11 +69,10 @@ $result = mysqli_query($conn, $sql);
                                 <td scope="row"><?php echo $row['status'] ?></td>
                                 <td scope="row">
                                     <a href="delete.php?idm=<?php echo $row["room_id"]; ?>" name="delete" class="btn" id="deletebtn"><i class="fa-solid fa-minus"></i></a>
-                                    
                                 </td>
                                 <td scope="row">
-                                    
-                                    <button type="submit" id="editbtn" class="btn mx-2" data-bs-toggle="modal"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <!-- <button type="submit" id="editbtn" class="btn mx-2" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-solid fa-pen-to-square"></i></button> -->
+                                    <a href="update.php?idm=<?php echo $row["room_id"]; ?>" type="submit" id="editbtn" class="btn mx-2" name="editbtn" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                             <?php } ?>
                             </tr>
@@ -82,7 +81,60 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
     </div>
-    <!-- Modal -->
+
+    <!-- Modal edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editModalLabel">Edit Room Info</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="update.php" method="post">
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Room number</label>
+                            <input type="text" name="roomnumber" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="mb-3">
+
+                            <label for="exampleFormControlInput1" class="form-label">Price</label>
+                            <input type="text" name="price" class="form-control" aria-describedby="basic-addon1">
+
+                            <label for="exampleFormControlInput1" class="form-label">Capacity</label>
+                            <input type="text" name="cap" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                        <div class=" mb-3">
+
+                            <label for="exampleFormControlInput1" class="form-label">Room categories</label>
+                            <select class="form-select" id="inputGroupSelect01" name="cateroom">
+                                <option selected>...</option>
+                                <option value="Single room">Single room</option>
+                                <option value="Double room">Double room</option>
+                            </select>
+
+                        </div>
+                        <div class=" mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Image</label>
+                            <input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+
+                        </div>
+                        <div class=" mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Details</label>
+                            <textarea name="detail" class="form-control" aria-label="With textarea"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="editbtn" class="btn">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal add -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
